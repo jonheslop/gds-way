@@ -1,0 +1,35 @@
+---
+title: Tracking dependencies
+expires: 2018-10-11
+---
+
+# <%= current_page.data.title %>
+
+<%= partial :expires %>
+
+## Needs
+
+- Developers and operators of services need to know if third party libraries they depend on are out of date or have security vulnerabilities reported
+- Any automated tooling should not add significant friction to the development process
+- It should support all our [supported programming languages](/standards/programming-languages.html)
+- It should not disclose potential security vulnerabilities to the public
+
+## Tools we've evaluated
+
+### Snyk.io
+
+Snyk monitors the dependencies of applications for reported security vulnerabilities. It will optionally check Pull Requests for the introduction of vulnerable dependencies. It will optionally create a PR to fix vulnerabilities.
+
+We evaluated Snyk on GOV.UK's Ruby repositories. We decided to disable the automatic checking and fixing capabilities of the service, but continue to use it as a dashboard of vulnerable gems.
+
+Its automatic checking regularly identified a low impact vulnerability in Nokogiri for which a fix wasn't available. This would cause PRs to show as failing checks in the GitHub interface. The proposed workaround was to allow Snyk to add a `.snyk.yml` file to the root of the repository to ignore the vulnerability in question. We decided not to allow this.
+
+There were further examples of false positives that proved difficult to silence. The noise of a failing Snyk build caused developers to ignore the check entirely, giving a false sense of security.
+
+Due to GOV.UK's policy of pessimistically pinning gem versions in the `Gemfile`, the automatically generated fix PRs wouldn't resolve the issue without manual tweaking of the proposed Pull Request.
+
+The automatically generated fixes would be shown to the public as a Pull Request on GitHub.com. This potentially discloses the vulnerability to the public.
+
+### [govuk-security-audit](https://github.com/alphagov/govuk_security_audit)
+
+This tool uses the `bundler-audit` gem to check the `Gemfile.lock` of repositories on the alphagov organisation. We recommend pairing this with regular checks that will feed any newly discovered vulnerabilities into the backlog of a mission team. The team can then prioritise the fix relative to other work, and address the issue in private before making the fix public.
