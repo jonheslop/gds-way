@@ -20,10 +20,43 @@ If you want to add guidance on Node.js please see [Updating this manual](#updati
 ### Style
 #### Formatting and linting
 To maintain consistent and readable style we use a few tools to keep our javascript 
-consistent. We use [Prettier] to format code and [xo] \(which is a wrapper around 
-ESLint) to linting. To make sure everything stays clean we recommend running these 
-tools pre-commit. Both [Prettier] and [xo] have can autofix common errors and have 
-clear error messaging when they can’t.
+consistent. We use [Prettier] to format code and [xo] for linting, with a config to make it [Standard] like. 
+To make sure everything stays clean we recommend running these tools pre-commit. 
+Both [Prettier] and [xo] have can autofix common errors and have clear error 
+messaging when they can’t. This is how the our [xo] config looks:
+
+``` json
+// package.json
+{
+  "xo": {
+    "extends": [
+      "prettier"
+    ],
+    "ignore": [
+      "node_modules/**/*.*"
+    ],
+    "rules": {
+      "space-before-function-paren": [
+        "error",
+        {
+          "anonymous": "always",
+          "named": "always",
+          "asyncArrow": "always"
+        }
+      ],
+      "quotes": [
+        "error",
+        "single",
+        {
+          "avoidEscape": true,
+          "allowTemplateLiterals": true
+        }
+      ]
+    },
+    "semicolon": false
+  },
+}
+```
 
 We’ve encapsulated our recommended process into a [repo](https://github.com/jonheslop/nodejs-starter) where everything is controlled 
 by a few lines of config within your `package.json`. Once you have ran `npm install` any time 
@@ -115,7 +148,6 @@ However it is important to keep an eye on the [Node.js LTS Schedule] as to when 
 * **[Node ES2015 support]** — Check Node.js support for ES2015+ features
 * **[JS documentation]** — MDN's definitive JS docs
 
-
 ## Updating this manual
 This manual, is not presumed to be infallible or beyond dispute.
 If you think something is missing or if you'd like to see something changed then:
@@ -136,3 +168,4 @@ of how likely your proposal is of being accepted as a pull request even before y
 [Node.js best practices]: https://github.com/i0natan/nodebestpractices
 [Prettier]: https://prettier.io/
 [xo]: https://github.com/sindresorhus/xo
+[Standard]: https://standardjs.com/
