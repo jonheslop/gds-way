@@ -19,11 +19,11 @@ If you want to add guidance on Node.js please see [Updating this manual](#updati
 
 ### Style
 #### Formatting and linting
-To maintain consistent and readable style we use a few tools to keep our javascript 
-consistent. We use [Prettier] to format code and [xo] for linting, with a config to make it [Standard] like. 
-To make sure everything stays clean we recommend running these tools pre-commit. 
-Both [Prettier] and [xo] have can autofix common errors and have clear error 
-messaging when they can’t. This is how the our [xo] config looks:
+To maintain consistent and readable style we use a few tools to keep our JavaScript 
+consistent. We use [Prettier] to format code and [xo]’s [Standard] preset for linting. 
+To make sure everything stays clean we recommend running these tools pre-commit. It is possible to setup a pre-commit hook to automate this process.
+Both [Prettier] and [xo] can auto-fix common errors and have clear error 
+messaging when auto-fix isn't possible. This is the [xo] config we use:
 
 ``` json
 // package.json
@@ -59,10 +59,10 @@ messaging when they can’t. This is how the our [xo] config looks:
 ```
 
 We’ve encapsulated our recommended process into a [repo](https://github.com/jonheslop/nodejs-starter) where everything is controlled 
-by a few lines of config within your `package.json`. Once you have ran `npm install` any time 
-you make a commit [xo] runs and formats your code with [Prettier] and lints it 
-with [xo], it will autofix small errors and continue with your commit, if there’s 
-something it can’t fix then the commit fails with a useful error message like:
+by a few lines of config within your `package.json`. Once you have run `npm install`, any time 
+you make a commit [xo] runs which formats your code with [Prettier] and lints it 
+with [xo]. [xo] will autofix small errors then continue with your commit. If there’s 
+something it can’t fix then the commit fails with a useful error message such as:
 
 ```
 ✖ xo --fix found some errors. Please fix them and try committing again.
@@ -72,13 +72,13 @@ app/utils/email_tools.js:1:1
 ```
 
 #### Editor plugins
-It’s nicer to know about lint errors before commit and you get live linting in 
-your text editor of choice by installing on of [xo’s plugins](https://github.com/sindresorhus/xo#editor-plugins), if you use a more heavyweight IDE then you can use 
+It’s nicer to know about lint errors before commit. To do this you can get live linting in 
+your text editor of choice by installing one of [xo’s plugins](https://github.com/sindresorhus/xo#editor-plugins). If you use a more heavyweight IDE then you can use 
 [ESLint plugin](https://eslint.org/docs/user-guide/integrations) instead. 
-[SublimeLinter](http://www.sublimelinter.com/) also will just ‘work’ with this config.
+[SublimeLinter](http://www.sublimelinter.com/) also will work out of the box using this config.
 
 ### Structure
-As well as having consistent code style is important that our projects and repos 
+As well as having a consistent code style it is important that our projects and repositories 
 are structured in similar ways so that developers can find things quickly and 
 easily. We want our code to be modular and reusable and so our project structure 
 should reflect this. Below are our four guiding principles (hat tip to [Rising Stack](https://blog.risingstack.com/) for this [blog post](https://blog.risingstack.com/node-hero-node-js-project-structure-tutorial/)).
@@ -114,8 +114,9 @@ module.exports = {
 
 #### Store test files within the implementation
 Keeping tests in the same directory makes them easier to find and makes it obvious 
-when a test is missing. Although do keep reusable test config and setup scripts 
+when a test is missing. Keep the projects global test config and setup scripts 
 in a separate `test` directory.
+
 
 ```
 ├── test
@@ -139,17 +140,17 @@ Keep your configuration together in a config folder
 ```
 
 ### Versions
-We should only use <abbr title="Long term support">LTS</abbr> versions of Node.js, these are even numbered versions (Node 6.x or 8.x).
-However it is important to keep an eye on the [Node.js LTS Schedule] as to when versions move in and out of LTS.
+We should only use <abbr title="Long term support">LTS</abbr> versions of Node.js. These are even numbered versions (e.g Node 6.x or 8.x).
+However, it is important to keep an eye on the [Node.js LTS Schedule] as to when versions move in and out of LTS.
 
-### Futher resources
+### Further resources
 * **[Node.js best practices]** — A comprehensive guide to Node.js best practices
 * **[node.cool]** — A curated list of Node.js packages and resources by Sindre Sorhus
 * **[Node ES2015 support]** — Check Node.js support for ES2015+ features
 * **[JS documentation]** — MDN's definitive JS docs
 
 ## Updating this manual
-This manual, is not presumed to be infallible or beyond dispute.
+This manual is not presumed to be infallible or beyond dispute.
 If you think something is missing or if you'd like to see something changed then:
 
 1. _(optional)_ Start with the [#Nodejs] community's Slack channel. See what other developers think and you'll get an idea
